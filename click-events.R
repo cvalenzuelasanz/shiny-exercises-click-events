@@ -30,6 +30,17 @@ server <- function(input, output) {
       geom_point(aes(x=hwy, y=displ))
   })
   
+  # For teaching purposes we're going to show the click event 
+  output$myRawOutput <- renderText({
+    # We need toString becasue we are showing a text inside our
+    # shiny app (we're inside a renderText)
+    
+    # input$myClickEvent is the input when a user clicks
+    # inside our plot. This name is the same we use in the UI
+    # (see line #63)
+    toString(input$myClickEvent)
+  })
+  
   # And each table are going to be here...
   output$clickTable <- renderTable({
     
@@ -45,10 +56,9 @@ server <- function(input, output) {
 }
 
 ui <- fluidPage(
-  # We need to add an id for the event input
-  # In this case every click'll be gathered in the
-  # "myClickEvent" input.
   plotOutput("plot", click = "myClickEvent"),
+  verbatimTextOutput("myRawOutput"), # We're going to add this
+  # for teaching purposes
   tabsetPanel( 
     tabPanel(title = "Click", tableOutput("clickTable")),
     tabPanel(title = "Double Click", tableOutput("dblclickTable")),
