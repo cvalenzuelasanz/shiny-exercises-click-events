@@ -21,17 +21,6 @@
 # Design Data Products and Visualization Techniques
 # by Alejandro Vidal (@doblepensador)
 
-
-### FIRST STEP
-# We made the empty boilerplate for a shiny app.
-# In this case we use the single-file format to help
-# to track the changes over the git history.
-#
-# You should be capable of write this without any external help
-# To test it you can run it and check anything breaks :)
-# Hint: In Rstudio the play button ("Run App") only appears after
-# you save this file.
-
 library(shiny)
 
 server <- function(input, output) {
@@ -39,6 +28,32 @@ server <- function(input, output) {
 }
 
 ui <- fluidPage(
+  plotOutput("plot"), # container for the scatterplot
+  # I use a generic name like plot because in this example
+  # we don't have any other plot. But this is not a very
+  # good name.
+  # Try to use name more descriptive like "mainPlot", 
+  # "topPlot", "scatterPlot", "correlationPlot"...
+  #
+  # Note the comma after plotOutput :) If your nodes
+  # are sibling you have to use a comma.
+  #
+  # parent(firstSibling(), secondSibling()) # CORRECT!
+  # parent(
+  #    firstSibling(),# CORRECT. It's the same but with indentation
+  #    secondSibling()
+  # )
+  
+  # parent(
+  #    firstSibling()  # ERROR: typical one. There's no separator
+  #                    #        between parameters
+  #    secondSibling(), # ERROR2: other typical. The last sibling
+  #                     # doesn't need a comma after it
+  # )
+  
+  tabsetPanel(
+    # Empty tabset panel. The fun will be here.
+  )
   
 )
 
