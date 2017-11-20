@@ -22,19 +22,12 @@
 # by Alejandro Vidal (@doblepensador)
 
 library(shiny)
+library(ggplot2)
 
 server <- function(input, output) {
-  # Always add brackets {} inside. We'll explain later the reason
-  # If your UI has an "plotOutput" you've to use "renderPlot".
-  # They've the same name: "XXXOutput" and "renderXXX"
-  
-  # Pay attention to we use the same id in the server and the ui
-  # to connect both.
-  
-  # For example we use "output$plot" because in UI we used 
-  # plotOutput("plot")
-  output$plot <- renderPlot({
-    # Here we are goint to "paint the plot"
+  output$plot <- renderPlot({ # Now you can see a graph! :)
+    ggplot(mpg) +
+      geom_point(aes(x=hwy, y=displ))
   })
   
   # And each table are going to be here...
