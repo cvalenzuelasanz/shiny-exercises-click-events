@@ -29,30 +29,30 @@ server <- function(input, output) {
 
 ui <- fluidPage(
   plotOutput("plot"), # container for the scatterplot
-  # I use a generic name like plot because in this example
-  # we don't have any other plot. But this is not a very
-  # good name.
-  # Try to use name more descriptive like "mainPlot", 
-  # "topPlot", "scatterPlot", "correlationPlot"...
-  #
-  # Note the comma after plotOutput :) If your nodes
-  # are sibling you have to use a comma.
-  #
-  # parent(firstSibling(), secondSibling()) # CORRECT!
-  # parent(
-  #    firstSibling(),# CORRECT. It's the same but with indentation
-  #    secondSibling()
-  # )
-  
-  # parent(
-  #    firstSibling()  # ERROR: typical one. There's no separator
-  #                    #        between parameters
-  #    secondSibling(), # ERROR2: other typical. The last sibling
-  #                     # doesn't need a comma after it
-  # )
-  
-  tabsetPanel(
-    # Empty tabset panel. The fun will be here.
+  tabsetPanel( # tabset for the results (click, double click..)
+    
+    tabPanel(title = "Click", # you don't need to write "title ="
+                              # but it's a good idea to remember
+                              # what's that in the future.
+             
+             # Yeah, a comma ^
+             
+             tableOutput("clickTable") # Good naming. I'll be able
+                                       # to remember what's for
+                                       # this table when I'll write
+                                       # the server.
+             
+             ),
+    # I'm going to write next tabPanels in one line because
+    # they're short and clear enought to make my code clean
+    # and concise
+    #
+    # SUPER important make your code clear, easy to read.
+    #
+    tabPanel(title = "Double Click", tableOutput("dblclickTable")),
+    tabPanel(title = "Hover", tableOutput("hoverTable"))
+    
+                                         # No comma here ^
   )
   
 )
