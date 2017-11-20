@@ -20,3 +20,26 @@
 # Teaching material for 
 # Design Data Products and Visualization Techniques
 # by Alejandro Vidal (@doblepensador)
+
+
+### FIRST STEP
+# We made the empty boilerplate for a shiny app.
+# In this case we use the single-file format to help
+# to track the changes over the git history.
+#
+# You should be capable of write this without any external help
+# To test it you can run it and check anything breaks :)
+# Hint: In Rstudio the play button ("Run App") only appears after
+# you save this file.
+
+library(shiny)
+
+server <- function(input, output) {
+  
+}
+
+ui <- fluidPage(
+  
+)
+
+shinyApp(ui = ui, server = server)
