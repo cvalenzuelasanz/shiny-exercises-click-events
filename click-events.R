@@ -24,37 +24,40 @@
 library(shiny)
 
 server <- function(input, output) {
+  # Always add brackets {} inside. We'll explain later the reason
+  # If your UI has an "plotOutput" you've to use "renderPlot".
+  # They've the same name: "XXXOutput" and "renderXXX"
   
+  # Pay attention to we use the same id in the server and the ui
+  # to connect both.
+  
+  # For example we use "output$plot" because in UI we used 
+  # plotOutput("plot")
+  output$plot <- renderPlot({
+    # Here we are goint to "paint the plot"
+  })
+  
+  # And each table are going to be here...
+  output$clickTable <- renderTable({
+    
+  })
+  
+  output$dblclickTable <- renderTable({
+    
+  })
+  
+  output$hoverTable <- renderTable({
+    
+  })
 }
 
 ui <- fluidPage(
-  plotOutput("plot"), # container for the scatterplot
-  tabsetPanel( # tabset for the results (click, double click..)
-    
-    tabPanel(title = "Click", # you don't need to write "title ="
-                              # but it's a good idea to remember
-                              # what's that in the future.
-             
-             # Yeah, a comma ^
-             
-             tableOutput("clickTable") # Good naming. I'll be able
-                                       # to remember what's for
-                                       # this table when I'll write
-                                       # the server.
-             
-             ),
-    # I'm going to write next tabPanels in one line because
-    # they're short and clear enought to make my code clean
-    # and concise
-    #
-    # SUPER important make your code clear, easy to read.
-    #
+  plotOutput("plot"),
+  tabsetPanel( 
+    tabPanel(title = "Click", tableOutput("clickTable")),
     tabPanel(title = "Double Click", tableOutput("dblclickTable")),
     tabPanel(title = "Hover", tableOutput("hoverTable"))
-    
-                                         # No comma here ^
   )
-  
 )
 
 shinyApp(ui = ui, server = server)
