@@ -45,7 +45,10 @@ server <- function(input, output) {
 }
 
 ui <- fluidPage(
-  plotOutput("plot"),
+  # We need to add an id for the event input
+  # In this case every click'll be gathered in the
+  # "myClickEvent" input.
+  plotOutput("plot", click = "myClickEvent"),
   tabsetPanel( 
     tabPanel(title = "Click", tableOutput("clickTable")),
     tabPanel(title = "Double Click", tableOutput("dblclickTable")),
