@@ -25,40 +25,40 @@ library(shiny)
 library(ggplot2)
 
 server <- function(input, output) {
-  output$plot <- renderPlot({ # Now you can see a graph! :)
+  output$plot <- renderPlot({
     ggplot(mpg) +
       geom_point(aes(x=hwy, y=displ))
   })
   
-  # For teaching purposes we're going to show the click event 
   output$myRawOutput <- renderText({
-    # We need toString becasue we are showing a text inside our
-    # shiny app (we're inside a renderText)
-    
-    # input$myClickEvent is the input when a user clicks
-    # inside our plot. This name is the same we use in the UI
-    # (see line #63)
     toString(input$myClickEvent)
   })
   
-  # And each table are going to be here...
   output$clickTable <- renderTable({
-    
+    nearPoints(mpg, input$myClickEvent)
   })
   
+  # The same for the rest of the tables (here and in UI)
   output$dblclickTable <- renderTable({
-    
+    nearPoints(mpg, input$myDblclickEvent)
   })
   
+  # but with different IDs
   output$hoverTable <- renderTable({
-    
+    nearPoints(mpg, input$myHoverEvent)
   })
 }
 
 ui <- fluidPage(
-  plotOutput("plot", click = "myClickEvent"),
-  verbatimTextOutput("myRawOutput"), # We're going to add this
-  # for teaching purposes
+  # Notice that I split this line in 5 to make it clearer.
+  # This is a good idea in general.
+  plotOutput(
+    "plot",
+    click = "myClickEvent",
+    dblclick = "myDblclickEvent",
+    hover = "myHoverEvent"
+  ),
+  verbatimTextOutput("myRawOutput"),
   tabsetPanel( 
     tabPanel(title = "Click", tableOutput("clickTable")),
     tabPanel(title = "Double Click", tableOutput("dblclickTable")),
